@@ -9,12 +9,15 @@ namespace Калькулятор
 {
     internal class Program
     {
-        internal static float a;
-        internal static float b;
-        internal static float c;
-        internal static double e;
+        // модификатор доступа можно не указывать, он и так по умолчанию internal
+        // имена переменным нузно давать значимые (т.е. отображающий их смысл) например: firstNumber, secondNumber, result
+        static float a;
+        static float b;
+        static float c;
+        static double e;
         static void Main(string[] args)
         {
+            // лучше было бы это все в 1 вызове Console.WriteLine написать используя форматирование строк (эту тему вы уже прошли).
             Console.WriteLine("Добро пожаловать в мир калькуль. Какое действие вы хотели бы выполнить?");
             Console.WriteLine("+ сложение");
             Console.WriteLine("- минус ");
@@ -32,7 +35,7 @@ namespace Калькулятор
             while (Console.ReadKey().Key != ConsoleKey.Escape)
             {
                 Console.WriteLine("Какое действие выполняем?");
-                string f = Console.ReadLine();
+                string f = Console.ReadLine(); // значимое имя для переменной. Например action. 
                 switch (f)
                 {
                     case "+":
@@ -78,12 +81,21 @@ namespace Калькулятор
             try { float d = Convert.ToSingle(Console.ReadLine()); return d; }
             catch { Console.WriteLine("Ты читал задание? Да, поэтому вместо того чтобы давать тебе второй шанс, мы введём 0."); return 0; }
         }
-        static void Summ()
+        static void GetNums ()
         {
             Console.WriteLine("Введите первое число ");
             a = Try();
             Console.WriteLine("Введите второе число ");
             b = Try();
+        }
+        static void Summ()
+        {
+            // так как эти 4 строки кода у вас повторяются много раз, то стоит вынести их в отдельный метод, а в нужном месте его вызывать
+             GetNums ();
+           // Console.WriteLine("Введите первое число ");
+            //a = Try();
+            //Console.WriteLine("Введите второе число ");
+            //b = Try();
             c = a + b;
             Console.WriteLine(c);
         }
